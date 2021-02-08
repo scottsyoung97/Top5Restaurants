@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Top 5 Restaurants";
+}
+
+@model IEnumerable<string>
+
+<div class="text-center">
+    <header>
+        <h1>Top 5 Restaurants in Provo</h1>
+    </header>
+
+    <ol>
+        @foreach (string i in Model)
+        {
+            <li>@i</li>
+        }
+    </ol>
+</div>
+
+<!--To Do
+    protect against null vallues in optional fields
+    check to see if are required fields are required and the alert displays
+    make sure phone number validates correctly
+    make sure to display "its all tasty" if fav dish is null
+    "coming soon" default if website is null
+    make sure restaurant rank is read only
+    make sure variable names are good and there are comments
+    
+    -->
