@@ -6,8 +6,8 @@
 }
 
 @model Top5Restaurants.Models.Suggestion
-
-<form asp-action="addsuggest" method="post" class="text-center">
+<!--Form to get input from user about suggestions and make sure phone number is valid-->
+<form asp-action="AddSuggestion" method="post" class="text-center">
     <label asp-for="Name">Name</label>
     <input asp-for="Name" />
     <br />

@@ -15,15 +15,18 @@ namespace Top5Restaurants.Models
         }
 
         [Required]
-        public int? RestRanking { get; }
+        public int RestRanking { get; }
         [Required]
         public string RestName { get; set; }
         [Required]
-        public string RestFavDish { get; set; } = "It's all tasty!";
+        public string RestFavDish { get; set; }
         public string RestAddress { get; set; }
+
+        //Make Sure Phone Number has a valid input
+        [RegularExpression(@"^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$", ErrorMessage = "Please enter a valid phone number")]
         public string RestNumber { get; set; }
         public string RestWebsite { get; set; } = "Coming Soon";
-
+        //Create Restaurants and store them within an array to pass to home controller
         public static Restaurant[] GetRestaurants()
         {
             Restaurant r1 = new Restaurant(1)
@@ -59,13 +62,11 @@ namespace Top5Restaurants.Models
                 RestFavDish = "Carne Asada",
                 RestAddress = "1011 Hilton Highway",
                 RestNumber = "801-123-4567",
-                RestWebsite = "mariabonitas.com"
             };
 
             Restaurant r5 = new Restaurant(5)
             {
                 RestName = "Panda Express",
-                RestFavDish = "Orange Chicken",
                 RestAddress = "1213 Spencer Circle",
                 RestNumber = "801-765-4321",
                 RestWebsite = "pandaexpress.com"

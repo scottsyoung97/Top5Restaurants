@@ -20,18 +20,20 @@ namespace Top5Restaurants.Controllers
 
         public IActionResult Index()
         {
-
+            //create a list and store the contents of the restaurant array
             List<string> restList = new List<string>();
 
             foreach (Restaurant r in Restaurant.GetRestaurants())
             {
-                restList.Add($"{r.RestName} Favorite Dish: {r.RestFavDish} Address: {r.RestAddress} Phone Number: {r.RestNumber} Website: {r.RestWebsite}");
+                string? favDish = r.RestFavDish ?? "It's all tasty!";
+
+                restList.Add($"{r.RestName} <br> Favorite Dish: {favDish} <br> Address: {r.RestAddress} <br> Phone Number: {r.RestNumber} <br>  Website: {r.RestWebsite} <br><br>");
             }
 
             return View(restList);
         }
 
-        public IActionResult Privacy()
+        public IActionResult Suggestions()
         {
             return View(TempStorage.Suggestions);
         }
@@ -42,15 +44,20 @@ namespace Top5Restaurants.Controllers
         }
 
         [HttpGet]
-        public IActionResult addsuggest()
+        public IActionResult AddSuggestion()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult addsuggest(Suggestion suggestion)
+        public IActionResult AddSuggestion(Suggestion suggestion)
         {
-            TempStorage.AddSuggestion(suggestion);
-            return View("Confirmation", suggestion);
+            //Make sure that the inputs are valid
+            if(ModelState.IsValid){
+                TempStorage.AddSuggestion(suggestion);
+                return View("Confirmation", suggestion);
+            }
+            return View();
+
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
